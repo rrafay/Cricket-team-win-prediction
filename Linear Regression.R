@@ -44,11 +44,10 @@ ggplot()+
 #plot for testing data
 ggplot()+
   geom_point(aes(x=test$Highest.Team.Score.Batting, y=test$Matches.Won), color = 'blue') +
-  geom_line(aes(test$Highest.Team.Score.Batting, y= predict(my_model, newdata= test)), color= 'red') +
+  geom_line(aes(training$Highest.Team.Score.Batting, y= predict(my_model, newdata= training)), color= 'red') +
   ggtitle('Matches Won vs Highest Totals (Testing Data)')+
   xlab('Highest Totals')+
   ylab('Matches Won')
-
 
 #summary(my_model)
 #my_model$coefficients
