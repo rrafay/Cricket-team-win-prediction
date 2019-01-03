@@ -11,11 +11,6 @@ dfbat<-
   Batting %>%
   select(Country, Matches.Won , Highest.Team.Score.Batting)
 
-#select only a few columns from batting
-dfplayerbat<-
-  playerBatting %>%
-  select(Player, Runs.Scored, Balls.Faced)
-
 
 
 #Split Training and Testing data
