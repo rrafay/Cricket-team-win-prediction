@@ -2,7 +2,6 @@ setwd("~/RWork/SLR")
 library(dplyr)
 library(caTools)
 library(ggplot2)
-library(ggplot2)
 library(stringr)
 Batting<- read.csv("Team batting.csv", header=TRUE, stringsAsFactors = FALSE)
 
@@ -14,7 +13,7 @@ dfbat<-
 
 
 #Split Training and Testing data
-split<- sample.split(dfbat$Matches.Won, SplitRatio = 0.8)
+split<- sample.split(dfbat$Matches.Won, SplitRatio = 0.75)
 
 training<-subset(dfbat, split==TRUE)
 
@@ -39,11 +38,19 @@ ggplot()+
 #plot for testing data
 ggplot()+
   geom_point(aes(x=test$Highest.Team.Score.Batting, y=test$Matches.Won), color = 'blue') +
-  geom_line(aes(training$Highest.Team.Score.Batting, y= predict(my_model, newdata= training)), color= 'red') +
+  geom_line(aes(test$Highest.Team.Score.Batting, y= predict(my_model, newdata= test)), color= 'red') +
   ggtitle('Matches Won vs Highest Totals (Testing Data)')+
   xlab('Highest Totals')+
   ylab('Matches Won')
 
-#summary(my_model)
+
+
+summary(my_model)
 #my_model$coefficients
 
+#p-value lower than 0.05 means there is a definite relation between the two variales.
+
+#RSE percentage. Lower the better
+sigma(my_model)*100/mean(dfbat$Matches.Won)
+
+#R squared = 0.5431
